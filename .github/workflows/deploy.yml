@@ -11,27 +11,24 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20.x]
-
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
       
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          node-version: '20.x'
+          cache: 'npm'
 
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm run dev --if-present
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the project
+        run: npm run build --if-present
 
       - name: Create .env file
         run: |
-          touch .env
           echo DB_HOST=${{ secrets.DB_HOST }} >> .env
           echo DB_PORT=${{ secrets.DB_PORT }} >> .env
           echo DB_USER=${{ secrets.DB_USER }} >> .env
@@ -39,6 +36,9 @@ jobs:
           echo DB_NAME=${{ secrets.DB_NAME }} >> .env
           echo NODE_PORT=${{ secrets.NODE_PORT }} >> .env
           echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
+
+      - name: Display .env file content
+        run: cat .env
 
       - name: Archive files
         uses: a7ul/tar-action@v1.1.0
