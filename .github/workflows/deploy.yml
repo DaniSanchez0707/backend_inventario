@@ -42,7 +42,7 @@ jobs:
           files: |
             captain-definition
             package.json
-            Dockerfile
+            src/
             .env
           outPath: deploy.tar
 
