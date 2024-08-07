@@ -29,6 +29,17 @@ jobs:
       - run: npm run build --if-present
       - run: npm run dev --if-present
 
+      - name: Create .env file
+        run: |
+          touch .env
+          echo DB_HOST=${{ secrets.DB_HOST }} >> .env
+          echo DB_PORT=${{ secrets.DB_PORT }} >> .env
+          echo DB_USER=${{ secrets.DB_USER }} >> .env
+          echo DB_PASSWORD=${{ secrets.DB_PASS }} >> .env
+          echo DB_NAME=${{ secrets.DB_NAME }} >> .env
+          echo NODE_PORT=${{ secrets.NODE_PORT }} >> .env
+          echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
+
       - name: Archive files
         uses: a7ul/tar-action@v1.1.0
         with:
@@ -37,6 +48,7 @@ jobs:
           files: |
             backend_inventario/
             captain-definition
+            .env
           outPath: deploy.tar
 
       - name: Deploy App to CapRover
@@ -46,11 +58,3 @@ jobs:
           app: ${{ secrets.APP_NAME }}
           token: ${{ secrets.APP_TOKEN }}
           tar: deploy.tar
-        env:
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_PORT: ${{ secrets.DB_PORT }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASS }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          NODE_PORT: ${{ secrets.NODE_PORT }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
