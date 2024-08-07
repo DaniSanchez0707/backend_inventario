@@ -1,4 +1,5 @@
 {
  "schemaVersion" :2 ,
- "templateId" :"node/20"
+ "templateId" :"node/20",
+ "dockerfilePath": "./Dockerfile"
 }
