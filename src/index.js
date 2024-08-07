@@ -6,7 +6,7 @@ import app from './app.js';
 
  dotenv.config()
 
- const port = process.env.VAR_NODE_PORT
+ const port = process.env.NODE_PORT
 app.listen(port, () => {
     console.log('listening on port ', port);
     validarConexion();
