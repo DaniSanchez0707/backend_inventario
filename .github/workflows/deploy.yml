@@ -33,26 +33,25 @@ jobs:
 
       - name: Create .env file
         run: |
-          echo DB_HOST=${{ secrets.DB_HOST }} >> backend_inventario/.env
-          echo DB_PORT=${{ secrets.DB_PORT }} >> backend_inventario/.env
-          echo DB_USER=${{ secrets.DB_USER }} >> backend_inventario/.env
-          echo DB_PASS=${{ secrets.DB_PASS }} >> backend_inventario/.env
-          echo DB_NAME=${{ secrets.DB_NAME }} >> backend_inventario/.env
-          echo NODE_PORT=${{ secrets.NODE_PORT }} >> backend_inventario/.env
-          echo ORIGIN=${{ secrets.ORIGIN }} >> backend_inventario/.env
-          echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> backend_inventario/.env
+          echo DB_HOST=${{ secrets.DB_HOST }} >> .env
+          echo DB_PORT=${{ secrets.DB_PORT }} >> .env
+          echo DB_USER=${{ secrets.DB_USER }} >> .env
+          echo DB_PASS=${{ secrets.DB_PASS }} >> .env
+          echo DB_NAME=${{ secrets.DB_NAME }} >> .env
+          echo NODE_PORT=${{ secrets.NODE_PORT }} >> .env
+          echo ORIGIN=${{ secrets.ORIGIN }} >> .env
+          echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
 
       - name: Print .env file
-        run: cat backend_inventario/.env
+        run: cat .env
 
-      - name: List directory contents
-        run: ls -la backend_inventario
+      
 
       - name: Archive files
         uses: a7ul/tar-action@v1.1.0
         with:
           command: c
-          cwd: backend_inventario
+          cwd: "./"
           files: |
             captain-definition
             .env
