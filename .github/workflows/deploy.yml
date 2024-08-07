@@ -45,7 +45,7 @@ jobs:
           echo "Listing root directory"
           ls -la
           echo "Listing backend_inventario directory"
-          ls -la backend_inventario
+          ls -la backend_inventario/
 
       - name: Archive files
         uses: a7ul/tar-action@v1.1.0
