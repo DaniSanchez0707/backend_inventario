@@ -46,7 +46,7 @@ jobs:
         run: cat .env
 
       - name: Run development server
-        run: npm run dev --if-present
+        run: npm run start --if-present
 
       - name: Archive files
         uses: a7ul/tar-action@v1.1.0
