@@ -1,30 +1,28 @@
-FROM node:20.1.0
-# Define build-time arguments
-ARG DB_USER
-ARG DB_HOST
-ARG DB_PORT
-ARG DB_NAME
-ARG DB_PASS
-ARG SECRET_KEY
-ARG NODE_PORT
-ARG origin
+# Usa la imagen base de Node.js
+FROM node:18
 
-# Set environment variables
-ENV DB_USER=${DB_USER}
-ENV DB_HOST=${DB_HOST}
-ENV DB_PORT=${DB_PORT}
-ENV DB_NAME=${DB_NAME}
-ENV DB_PASS=${DB_PASS}
-ENV SECRET_KEY=${SECRET_KEY}
-ENV NODE_PORT=${NODE_PORT}
-ENV origin=${origin}
+# Crea el directorio de la aplicación
+WORKDIR /usr/src/app
 
-WORKDIR /app
-
-COPY package.json .
-
-RUN npm install
-
+# Copia los archivos de la aplicación
+COPY package*.json ./
 COPY . .
 
+# Instala las dependencias
+RUN npm install
+
+# Expon el puerto
+EXPOSE 4000
+
+# Define las variables de entorno
+ENV DB_USER=$DB_USER
+ENV DB_HOST=$DB_HOST
+ENV DB_NAME=$DB_NAME
+ENV DB_PASS=$DB_PASS
+ENV DB_PORT=$DB_PORT
+ENV NODE_PORT=$NODE_PORT
+ENV origin=$origin
+ENV SECRET_KEY=$SECRET_KEY
+
+# Ejecuta la aplicación
 CMD ["npm", "run", "dev"]
