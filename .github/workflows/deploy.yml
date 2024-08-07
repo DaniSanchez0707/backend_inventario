@@ -40,12 +40,7 @@ jobs:
       - name: Display .env file content
         run: cat .env
 
-      - name: List directory contents
-        run: |
-          echo "Listing root directory"
-          ls -la
-          echo "Listing backend_inventario directory"
-          ls -la backend_inventario/
+      
 
       - name: Archive files
         uses: a7ul/tar-action@v1.1.0
