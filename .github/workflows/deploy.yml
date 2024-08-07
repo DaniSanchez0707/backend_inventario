@@ -37,8 +37,7 @@ jobs:
           echo NODE_PORT=${{ secrets.NODE_PORT }} >> .env
           echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
 
-      - name: Display .env file content
-        run: cat .env
+      
 
       
 
