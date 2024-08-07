@@ -5,6 +5,7 @@ import app from './app.js';
 
 
  dotenv.config()
+
  
  
 console.log(process.env.DB_HOST)
