@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import { generarToken } from "../config/jwt.js";
 
 
+
 export const registroUsuario = async (req, res) => {
   const { nombre_usuario, contrasena, nombre_completo, email, rol_id } =
     req.body;

@@ -41,6 +41,8 @@ jobs:
           cwd: "./"
           files: |
             captain-definition
+            package.json
+            Dockerfile
             .env
           outPath: deploy.tar
 
