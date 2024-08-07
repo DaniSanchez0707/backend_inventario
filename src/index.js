@@ -8,6 +8,7 @@ import app from './app.js';
 
 
 
+
  
 console.log(process.env.DB_HOST)
  const port = process.env.NODE_PORT
