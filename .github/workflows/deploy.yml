@@ -11,15 +11,19 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [18.x]
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Use Node.js 20.x
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'
-          cache: 'npm'
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -37,11 +41,8 @@ jobs:
           echo NODE_PORT=${{ secrets.NODE_PORT }} >> .env
           echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
 
-      - name: List root directory
-        run: ls -la
-
-      - name: List backend_inventario directory
-        run: ls -la backend_inventario
+      - name: Run development server
+        run: npm run dev --if-present
 
       - name: Archive files
         uses: a7ul/tar-action@v1.1.0
@@ -57,7 +58,7 @@ jobs:
       - name: Deploy App to CapRover
         uses: caprover/deploy-from-github@v1.0.1
         with:
-          server: ${{ secrets.CAPROVER_SERVER }}
-          app: ${{ secrets.APP_NAME }}
-          token: ${{ secrets.APP_TOKEN }}
+          server: '${{ secrets.CAPROVER_SERVER }}'
+          app: '${{ secrets.APP_NAME }}'
+          token: '${{ secrets.APP_TOKEN }}'
           tar: deploy.tar
