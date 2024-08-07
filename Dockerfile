@@ -1,14 +1,10 @@
-FROM node:20-alpine
+FROM node:20.1.0
 
-RUN apk update && apk upgrade && apk add --no-cache git
+WORKDIR /app
 
-WORKDIR /usr/src/app
-
-COPY package.json ./
-COPY package-lock.json ./
+COPY package.json .
 
 RUN npm install
 
 COPY . .
-
-CMD [ "npm", "run", "start" ]
+CMD ["npm", "run", "start"]
