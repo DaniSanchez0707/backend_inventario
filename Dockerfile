@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 
 # Copia el archivo package.json y package-lock.json (si está disponible)
 COPY package.json /usr/src/app/
-COPY package-lock.json /usr/src/app/ # Si tienes package-lock.json, también lo copias
+COPY package-lock.json /usr/src/app/ 
 
 # Instala las dependencias de producción
 RUN npm install --production && npm cache clean --force
