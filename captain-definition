@@ -1,4 +1,20 @@
 {
- "schemaVersion" :2 ,
- "templateId" :"node/20"
-}
+    "schemaVersion": 2,
+    "templateId": "node/20",
+    "dockerfile": "backend_inventario/Dockerfile",
+    "dockerBuild": {
+      "context": "backend_inventario/",
+      "dockerfile": "Dockerfile"
+    },
+    "appPort": 4000,
+    "healthCheck": {
+      "http": {
+        "path": "/health",
+        "port": 4000
+      },
+      "interval": 30,
+      "timeout": 5,
+      "retries": 3
+    }
+  }
+  
