@@ -40,6 +40,9 @@ jobs:
           echo DB_NAME=${{ secrets.DB_NAME }} >> .env
           echo NODE_PORT=${{ secrets.NODE_PORT }} >> .env
           echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
+          
+      - name: Print .env file
+        run: cat .env
 
       - name: Run development server
         run: npm run dev --if-present
