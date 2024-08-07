@@ -1,10 +1,20 @@
-FROM node:20.1.0
+# Usa la imagen base de Node.js
+FROM node:20-alpine
 
-WORKDIR /app
+# Actualiza el sistema e instala git
+RUN apk update && apk upgrade && apk add --no-cache git
 
-COPY package.json .
+# Crea el directorio de trabajo
+WORKDIR /usr/src/app
 
+# Copia package.json al contenedor
+COPY package.json ./
+
+# Instala las dependencias
 RUN npm install
 
+# Copia el resto del código al contenedor
 COPY . .
-CMD ["npm", "run", "start"]
+
+# Define el comando de inicio
+CMD ["npm", "start"]
