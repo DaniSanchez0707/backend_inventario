@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 
+
 export const generarToken = async (usuario) => {
     try {
         const token = jwt.sign({username: usuario.nombre_usuario}, process.env.SECRET_KEY, {expiresIn: '24h'}) 
